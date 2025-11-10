@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Srishti | codingstella</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            Happy Birthday🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            I Love You🌹❤.<br />Mr. Introvert Special Edition
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>Some people come into our lives unexpectedly, yet leave a lasting impact.
+        You’re one of those rare souls who make every moment feel a little more special. 💫
+        
+        From the very first conversation, there was something about you — your warmth, your charm, aur woh simple si smile jo har cheez ko thoda aur khoobsurat bana deti hai.
+        
+        Aaj tumhara birthday hai, aur yeh sirf ek wish nahi… ek ehsaas hai —
+        a small way to tell you how much you mean to me. 💖
+        You’ve become that person jisse baat karke har din thoda better lagta hai, aur jisse milke dil ko ek alag sukoon milta hai.
+        
+        So here’s to you — to your special day, to our beautiful bond,
+        and to all those moments jo abhi likhne baaki hain.
+        Happy Birthday to someone who’s truly special… to me. 🎂💞</p>
+
+          <p>
+            I feel very special to have you in my Boring Life... <br />Since we connect in
+            Instagram 
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Strangers to Something Special ❤️✨</h2>
+          <p>
+            It’s incredible to think how, just a few time ago, I didn’t even know you. Meeting you through Satish was a moment of fate that I’ll always be grateful for.
+
+At first, I wasn’t sure how we’d connect, what we’d talk about, or what kind of person you’d be. But now, after spending time with you, I’ve realized something truly special—
+
+You’re absolutely amazing. 💖
+
+Your words, your kindness, and the way you make me smile have already made a place in my heart. I never expected to meet someone like you, but now, I can’t imagine not having you in my life.
+
+Maybe it was destiny, or maybe it was just luck—but whatever it was, I’m glad it brought me to you. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.png" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+            There’s something about you — a vibe, a magic, that words can never really capture.
+            It’s not just the sparkle in your eyes or the warmth of your smile… it’s the way your presence turns even the simplest moment into something unforgettable.
+            When you’re around, everything just feels softer, calmer — a little more beautiful. ❤️
+            I still remember the first time we went out together — India Gate ki thandi hawa, the calm at Bangla Sahib, and the beauty of Amrit Udyan that day. But honestly, none of it felt as beautiful as the moment you broke that little flower from the tree and handed it to me — simple, unexpected, yet so unforgettable. 🌸
+
+           That day wasn’t just a day out… it was a memory — one that I keep replaying in my mind, because somewhere between those laughs and quiet moments, you became special.
+           Every time I think of you, I’m reminded that some people aren’t just moments in life — they’re stories worth keeping forever.
+           And you, without a doubt, are mine. ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Strength with you✨💖</h2>
+          <p>
+            Mujhe nahi pata future me kya hoga,
+           par jab tum mere saath hote ho,
+           saari cheezein easy lagti hain.
+           Jo bhi challenges hote hain, unka samna karne ki himmat mujhe bas tumhare saath hone se milti hai. 💖
+
+           Tum sirf meri khushi nahi, meri strength bhi ho.
+           Har mushkil me tumhara saath feel karna… jaise duniya ke saare problems thode chhote ho jate hain.
+           Tumhare saath hone se lagta hai ki kuch bhi impossible nahi.
+
+           Aur sabse special baat ye hai ki, tumhare saath har chhota moment bhi extraordinary lagta hai — ek simple walk, ek smile, ya bas tumhari baat sunna.
+           Yehi moments mujhe yaad dilate hain ki tum sirf meri support nahi, meri inspiration bhi ho. ✨
+
+           Tum meri life ka wo hissa ho jisse main kabhi khona nahi chahti, kyunki tum ho toh main confident feel karti hoon, strong feel karti hoon, aur ready hoon duniya ke saamne khadi hone ke liye. 💞
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+            Talking to you has quickly become one of the highlights of my day. Every time I see a message from you, I can’t help but smile—it’s like a little spark of happiness. No matter how my day is going, our conversations make everything feel lighter and brighter.
+
+            You have a way of making the simplest moments special.
+            
+            It’s not just about how beautiful you are; it’s the warmth, kindness, and charm in the way you talk. Your words have a magic that makes me feel at ease, and your presence alone brings joy.
+            
+            I never knew a conversation could mean so much, but with you, it does. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+            Roz tumse milti hoon college me, phir bhi har baar lagta hai ki kaash ye moment ruk jaye…
+            Chahe kuch bhi ho, main hamesha tumhare saath hoon, har moment, har situation me.
+            Tumhare saath bitaye chhote-chhote pal mere liye priceless hain — woh laugh, woh teasing, aur woh little moments jo bas hum dono samajhte hain. 💖
+            Tum mujhse kuch bhi share kar sakte ho, kabhi bhi. Main hamesha sunungi… aur samjhaungi bhi, bina judge kiye. 💖
+            Tum sirf important nahi ho, tum wo insan ho jinke bina din adhura lagta hai.
+            Bas yaad rakhna, tum akela nahi ho, aur jo bhi life me aaye, hum saath hain.
+            Tum meri life ka wo part ho jo sab kuch complete kar deta hai. Tumhare saath har moment feel karna, tumhare saath laugh karna, aur bas tumhare saath rehna — ye sab meri world ko special bana dete hain. 💞
+
+            So today, on your birthday, just know — chahe kuch bhi ho, main hamesha tumhare saath hoon.
+            Happy Birthday! You’re truly special to me. 🎂💖
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            You’re someone really special, and I want you to know that I’ll always be here for you, no matter what.
+            <p></p>
+           If you ever want to talk, laugh, or just need someone to be around, I’m always just a message away.
+           <p></p>
+           Life can be unpredictable, but with me by your side, you’ll never have to face it alone.
+           <p></p>
+           Whether it’s a good day or a tough one, I’ll be there — to cheer you on, to make you smile, or just to sit quietly with you.
+           <p></p>
+           You deserve all the happiness in the world, and I’m glad I can be a part of it in my own little way.
+           <p></p>
+           No matter what happens, you’ll always have me — someone who cares, someone who’s genuinely on your side. 💞
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beauty of You ✨💖</h2>
+          <p>
+            Can we just take a moment to notice how effortlessly amazing you look in everything you wear?
+            Seriously, chahe tum kuch bhi pehno, tum hamesha best lagte ho. ✨
+            <p></p>
+            Tumhari smile dekho ya tumhari baatein suno,
+            Har pal lagta hai jaise time ruk gaya ho.
+            Chahe kuch bhi ho, bas tum ho aur main — bas itna hi kaafi hai. 💖
+            <p></p>
+            No matter what, tum sirf handsome nahi ho, you’re extraordinary.
+            Aur sach bolun… bas tumhare saath rehna aur tumhe dekhna, yehi sabse special lagta hai. 🌸💞
+          </p>
+        </div>
+        <div class="back">
+          <h2>Absolutely Breathtaking ✨💖</h2>
+          <p>
+            In everything you wear, you are nothing short of breathtaking.
+            I’m completely in awe of you.</p>
+            I tried to unlove you, I swear I tried...!</p>
+            But how can I forget, Forget the eyes, that feels like ocean to me...! That drowns me deep inside them...!</p>
+            Forget your glance, That makes me shiver!</p>
+            How can I avoid the urge, Urge to find you in the whole college, full of people...!</p>
+            And when finally, I get to see you!</p>
+            I just can't take my eyes off you...!</p>
+             There’s something so effortlessly captivating about you that makes it impossible to look away.</p>
+            You are not just Handsome—you are a work of art, inside and out. 💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹❤</h2>
+          <p>
+            just wanted to take a moment to tell you how much you mean to me.
+           From the very beginning, there was something different about you — something so real, so rare. ✨
+           <p></p>
+           Tumhari baaton me woh warmth hai, tumhari presence me woh comfort, aur jo way tum har chhoti si baat ko special bana dete ho — bas sab kuch directly dil ko touch kar leta hai. 💖
+           <p></p>
+           Kabhi kabhi life me koi mil jaata hai jo bina effort ke hi ek permanent jagah bana leta hai... aur tum unhi me se ek ho. 💖
+          <p></p>
+          Meeting you, even for a short time, felt like a blessing.
+          <p>
+          Main genuinely thankful hoon ki humari paths cross hui.
+          <p>
+        Future me jo bhi ho, par tum hamesha ek beautiful memory ban kar rahoge mere liye. 🌸
+        <p></p>
+
+You’re not just special — you’re unforgettable. 💞
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+          <p>Tumhari smile aur tumhari baatein… bas sab kuch itna naturally special lagta hai. 💖
+            <p>
+            Tumhare saath har pal thoda aur interesting lagta hai, aur kabhi kabhi lagta hai ki waqt bas ruk jaaye.
+            <p></p>
+            Chahe kuch bhi ho, main hamesha tumse pyaar karungi… quietly, sincerely, aur endlessly. ✨
+            Aur haan, tumhare teasing ka effect… kabhi kam nahi hota! 😏
+            Tumhari woh way jo chhoti chhoti baaton me bhi special feel karwate ho, bas sabse alag aur unforgettable hai.
+            <p></p>
+            Tumhari smile se lagta hai din bright,
+            <p>
+           Aur tumhari tease se heart ho jaaye light. 😏
+           <p>
+           Tum ho mere liye thodi naughty, thodi sweet,
+           <p>
+           Aur tumhare saath har pal lagta perfect treat. 💖
+           <p></p>
+
+Chahe kuch bhi ho, main hamesha tumhare saath hoongi,
+Aur tumhare playful ways… kabhi bhi nahi bhoolungi. ✨💞
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./3.jpg" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3></h3>
+          <p>
+            <br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
